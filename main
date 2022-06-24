@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+ 
+ 
+
 dictionairy = {
     "the": [
             [0],
@@ -28,6 +32,10 @@ dictionairy = {
         [1,0,1],
         [3]
         ],
+    "dog": [
+        [1],
+        [4]
+        ]
 }
 
 def checkLinesRhyme(rhyme_scheme_1, rhyme_scheme_2):
@@ -37,9 +45,7 @@ def checkSameRhythm(rhythm_scheme_1,rhythm_scheme_2):
     return rhythm_scheme_1 == rhythm_scheme_2
     
 def checkMeetsTimbre(rhythm_scheme: [], timbre: [])-> bool:
-    
-    
-    
+
     timbre_length = len(timbre)
     split_rhythm_scheme = list_split(rhythm_scheme, timbre_length)
     
@@ -72,10 +78,113 @@ def produce_rhyme_rhythm_scheme(string):
         rhyme  += dictionairy[word.lower()][1]
     
     return [words,rhyme,rhythm]
- 
+    
+string_scheme_1 =  produce_rhyme_rhythm_scheme(string_1)  
+string_scheme_2 =  produce_rhyme_rhythm_scheme(string_2)  
 
-def write_sentence(timbre):
+print("Line 1: ", string_1)
+print("Line 2: ", string_2)
+
+print("Line 1 and line 2 rhyme: ", checkLinesRhyme(string_scheme_1[1],string_scheme_2[1]))
+print("Line 1 and line 2 have same rhythm: ", checkSameRhythm(string_scheme_1[2], string_scheme_2[2]))
+print("Line 1 is Iambic Pentameter: ", checkMeetsTimbre(string_scheme_1[2], [0,1] ))
+
+
+
+
+print("---------------------")
+string_1 = "The cat sat on the mat"
+string_2 = "The cat sat on the dog"
+
+string_scheme_1 =  produce_rhyme_rhythm_scheme(string_1)  
+string_scheme_2 =  produce_rhyme_rhythm_scheme(string_2)  
+
+print("Line 1: ", string_1)
+print("Line 2: ", string_2)
+
+print("Line 1 and line 2 rhyme: ", checkLinesRhyme(string_scheme_1[1],string_scheme_2[1]))
+print("Line 1 and line 2 have same rhythm: ", checkSameRhythm(string_scheme_1[2], string_scheme_2[2]))
+print("Line 1 is Iambic: ", checkMeetsTimbre(string_scheme_1[2], [0,1] ))
+
+print("---------------------")
+string_1 = "The cat on mat"
+
+
+string_scheme_1 =  produce_rhyme_rhythm_scheme(string_1)  
+
+print("Line 1: ", string_1)
+
+
+print("Line 1 is Iambic Pentameter: ", checkMeetsTimbre(string_scheme_1[2], [0,1] ))
+
+ word = {
+     chars: str,
+     sounds: [ str ],
+     rhyme: [ str ],
+     rhythm: [ bool ]
+ }
+
+# REPLACE WITH ENUM AS ONLY SO MANY THINGS
+@dataclass
+rule = {
+    name: str,
+    type: str,
+    check: lambda
+}
+
+
+
+
+
+
+def write_sentence(rules: []):
+    
     done = False
+    
+    def generate
+    
+    def check_against_rules( rules: [str], sentence: [[]]):
+        
+        for check_rule in rules:
+            result_text = rule.check(sentence)
+            print(result_text)
+            
+        
+            
+            
+            
+            
+        
+        
+    
+    def check_timbre_fit
+    ( 
+         timbre: [ ]
+        ,sentence_words: [ [ [  ]]]
+        ,test_rhythm: [ [  ]]
+    ):
+        relevent_beats = sentence_words[ [2] [ - len( timbre) ) ]
+        
+        if  not checkMeetsTimbre( 
+            relevent_beats + test_rhythm
+            , timbre
+            ):
+                # for rule in rules:
+                    # check rules
+                check_against_rules( rules, sentence ) # !!! Can make this recursive probably
+                
+                
+                
+                print("Here are some suggested words: \n\n")
+                print( sentence.suggest_words() )
+                print("Type /y to use this word, or anything else to write that word")
+                
+                
+                
+        
+        
+        
+        
     
     sentence = [
         [], # words
@@ -86,9 +195,30 @@ def write_sentence(timbre):
     while( not done ):
         syllabul_number = len(flatten(words))
         
-        word = input()
+        test_word = dictionairy[input()]
+        
+        
+        
+        
         
         sentence.append()
         
         if word[-1] == ".": break
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
