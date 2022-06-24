@@ -133,6 +133,7 @@ rule = {
 }
 
 
+def check_timbre
 
 
 
@@ -143,17 +144,29 @@ def write_sentence(rules: []):
     
     def generate
     
-    def check_against_rules( rules: [str], sentence: [[]]):
+    def warn_against_rules( rules: [str], sentence: [[]]):
         
         for check_rule in rules:
             result_text = rule.check(sentence)
             print(result_text)
             
         
+           
             
+    def check_line_length( max_length, sentence):
+        sentence_length = len(sentence[2])
+        
+        if sentence_length > max_length:
+            print("Breaks rule: line length"))
+            return
+        
+        if sentence_length == max_length:
+            print("At max Length")
+            return
+        
+        
             
-            
-            
+        
         
         
     
@@ -165,27 +178,12 @@ def write_sentence(rules: []):
     ):
         relevent_beats = sentence_words[ [2] [ - len( timbre) ) ]
         
-        if  not checkMeetsTimbre( 
+        if  not checkMeetsTimbre(           # !!! Better name
             relevent_beats + test_rhythm
             , timbre
             ):
-                # for rule in rules:
-                    # check rules
-                check_against_rules( rules, sentence ) # !!! Can make this recursive probably
-                
-                
-                
-                print("Here are some suggested words: \n\n")
-                print( sentence.suggest_words() )
-                print("Type /y to use this word, or anything else to write that word")
-                
-                
-                
-        
-        
-        
-        
-    
+                print("Breaks rule: timbre")
+
     sentence = [
         [], # words
         [], # rhyme
@@ -197,13 +195,24 @@ def write_sentence(rules: []):
         
         test_word = dictionairy[input()]
         
+        warn_agaist_rules( rules, sentence )
         
         
+        print("Here are some suggested words: \n\n")
+        print( sentence.suggest_words() )
+        print("Type /y to use this word, or anything else to write that word")
         
-        
-        sentence.append()
+        response = input()
+        if response() == "/y":
+            sentence.append(test_word)
+        else:
+            sentence.append(response)
         
         if word[-1] == ".": break
+    
+    
+    
+    
     
     
     
