@@ -1,6 +1,3 @@
-# Online Python compiler (interpreter) to run Python online.
-# Write Python 3 code in this online editor and run it.
-
 dictionairy = {
     "the": [
             [0],
@@ -64,14 +61,6 @@ string_2 = "The cat sat on the mat scrawnily"
 string_3 = "The cat on mat"
 
 
-words_2 = string_2.lower().split(" ")
-words_3 = string_3.lower().split(" ")
-
-
-
-rhythm_1 = []
-rhyme_1  = []
-
 def produce_rhyme_rhythm_scheme(string):
     words = string.lower().split(" ")
 
@@ -82,25 +71,23 @@ def produce_rhyme_rhythm_scheme(string):
         rhythm += dictionairy[word.lower()][0]
         rhyme  += dictionairy[word.lower()][1]
     
-    return [words,rhythm,rhyme]
+    return [words,rhyme,rhythm]
  
-rhythm_2 = []
-rhyme_2  = []  
-for word in words_2:
-    rhythm_2 += dictionairy[word.lower()][0]
-    rhyme_2  += dictionairy[word.lower()][1]
-    
-rhythm_3 = []
-rhyme_3  = []  
-for word in words_3:
-    rhythm_3 += dictionairy[word.lower()]
-    rhyme_3  += dictionairy[word.lower()][1]
-    
-    
-    
-print(produce_rhyme_rhythm_scheme(string_3))
-    
-print(checkLinesRhyme(rhyme_1,rhyme_2))
-print(checkSameRhythm(rhythm_1,rhythm_2))
 
-print(checkMeetsTimbre(rhythm_3,[0,1,0]))
+def write_sentence(timbre):
+    done = False
+    
+    sentence = [
+        [], # words
+        [], # rhyme
+        []  # rhythm
+        ]
+    
+    while( not done ):
+        syllabul_number = len(flatten(words))
+        
+        word = input()
+        
+        sentence.append()
+        
+        if word[-1] == ".": break
