@@ -91,3 +91,4 @@ def write_sentence(timbre):
         sentence.append()
         
         if word[-1] == ".": break
+        
