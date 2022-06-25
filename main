@@ -1,5 +1,6 @@
 from dataclasses import dataclass
- 
+import math
+
 def flatten(xss):
     return [x for xs in xss for x in xs]
 
@@ -49,6 +50,8 @@ def checkMeetsTimbre(rhythm_scheme: [], timbre: [])-> bool:
 
     timbre_length = len(timbre)
     split_rhythm_scheme = list_split(rhythm_scheme, timbre_length)
+    
+    
     
     for split in split_rhythm_scheme:
         if split != timbre: return False
@@ -169,20 +172,28 @@ def check_timbre_fit(
         sentence
         , test_word
     ):
+        #print("Checking Timbre Fit")
         
         timbre = [0,1]
         
         sentence_rhythm = produce_rhyme_rhythm_scheme(sentence)[2]
-        print(sentence_rhythm)
+        #print(sentence_rhythm)
         relevent_beats = sentence_rhythm[ - len( timbre) : ]
+        test_beats = relevent_beats + dictionairy[test_word]["rhythm"]
+        #print("Test beats:", test_beats)
+        
+        phrase_count = math.ceil(len(test_beats) / len(timbre) )
+        
+        correct_rhythm = []  
+        for i in range(0, phrase_count):
+            correct_rhythm+= timbre
+        
+        #print("Correct Rhythm:", correct_rhythm)
+
+        if test_beats != correct_rhythm[: len(test_beats)]:
+            print("Breaks rule: timbre")
         
         
-        print(test_word)
-        if  not checkMeetsTimbre(           # !!! Better name
-            relevent_beats + dictionairy[test_word]["rhythm"]
-            , timbre
-            ):
-                print("Breaks rule: timbre")
 
     
 def warn_against_rules( rules: [], sentence, test_word, test_word_props):
@@ -202,7 +213,7 @@ def write_sentence(rules: []):
         test_word = input()
         test_word_props = dictionairy[test_word]
         
-        warn_against_rules(rules, sentence, test_word, test_word_props )
+        warn_against_rules(rules, sentence, test_word, test_word_props)
         
         
         print("Here are some suggested words: \n\n")
@@ -211,10 +222,10 @@ def write_sentence(rules: []):
         
         response = input()
         if response == "/y":
-            
             sentence.append(test_word)
         else:
-            sentence.append(response)
+            continue
+            
 
         
         if test_word[-1] == ".": break
@@ -223,4 +234,7 @@ def write_sentence(rules: []):
     
     
 write_sentence([check_line_length, check_timbre_fit])
+    
+    
+    
     
