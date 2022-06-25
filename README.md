@@ -1,2 +1,2 @@
 # WritingHelper
-# Make the web visualisation of react dumbass
+# Make the web visualisation of functional programming in  react dumbass
