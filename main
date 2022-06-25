@@ -1,41 +1,42 @@
 from dataclasses import dataclass
  
- 
+def flatten(xss):
+    return [x for xs in xss for x in xs]
 
 dictionairy = {
-    "the": [
-            [0],
-            [0]
-            ]
-        ,
-    "cat": [
-        [1],
-        [1]
-        ],
-    "sat": [
-        [1],
-        [1]
-        ],
-    "on": [
-        [0],
-        [2]
-        ],
-    "mat": [
-        [1],
-        [1]
-        ],
-    "slowly": [
-        [1,0],
-        [3]
-        ],
-    "scrawnily": [
-        [1,0,1],
-        [3]
-        ],
-    "dog": [
-        [1],
-        [4]
-        ]
+    "the": {
+        "rhythm": [0],
+        "rhyme": 0
+        },
+        
+    "cat": {
+        "rhythm": [1],
+        "rhyme": 1
+        },
+    "sat": {
+        "rhythm": [1],
+        "rhyme": 1
+        },
+    "on": {
+        "rhythm": [0],
+        "rhyme": 2
+        },
+    "mat": {
+        "rhythm": [1],
+        "rhyme": 1
+        },
+    "slowly": {
+        "rhythm": [1,0],
+        "rhyme": 3
+        },
+    "scrawnily": {
+        "rhythm": [1,0,1],
+        "rhyme": 3
+        },
+    "dog": {
+        "rhythm": [1],
+        "rhyme": 4
+        },
 }
 
 def checkLinesRhyme(rhyme_scheme_1, rhyme_scheme_2):
@@ -67,18 +68,19 @@ string_2 = "The cat sat on the mat scrawnily"
 string_3 = "The cat on mat"
 
 
-def produce_rhyme_rhythm_scheme(string):
-    words = string.lower().split(" ")
+def produce_rhyme_rhythm_scheme(sentence):
+    words = [word.lower() for word in sentence]
 
     rhythm = []
     rhyme  = []
     
     for word in words:
-        rhythm += dictionairy[word.lower()][0]
-        rhyme  += dictionairy[word.lower()][1]
+        rhythm.append(dictionairy[word]["rhythm"])
+        rhyme.append(dictionairy[word]["rhyme"])
     
-    return [words,rhyme,rhythm]
-    
+    return [words,rhyme,flatten(rhythm)]
+
+"""    
 string_scheme_1 =  produce_rhyme_rhythm_scheme(string_1)  
 string_scheme_2 =  produce_rhyme_rhythm_scheme(string_2)  
 
@@ -115,119 +117,110 @@ string_scheme_1 =  produce_rhyme_rhythm_scheme(string_1)
 print("Line 1: ", string_1)
 
 
-print("Line 1 is Iambic Pentameter: ", checkMeetsTimbre(string_scheme_1[2], [0,1] ))
+#print("Line 1 is Iambic Pentameter: ", checkMeetsTimbre(string_scheme_1[2], [0,1] ))
+"""
+"""
+word = {
+    chars: str,
+    sounds: [ str ],
+    rhyme: [ str ],
+    rhythm: [ bool ]
+}
+ 
 
- word = {
-     chars: str,
-     sounds: [ str ],
-     rhyme: [ str ],
-     rhythm: [ bool ]
- }
-
-# REPLACE WITH ENUM AS ONLY SO MANY THINGS
-@dataclass
-rule = {
-    name: str,
-    type: str,
-    check: lambda
+sentence = {
+ words: word
 }
 
 
-def check_timbre
+paragraph = {
+ sentences: sentence
+}
 
 
 
+# REPLACE WITH ENUM AS ONLY SO MANY THINGS
 
-def write_sentence(rules: []):
-    
-    done = False
-    
-    def generate
-    
-    def warn_against_rules( rules: [str], sentence: [[]]):
-        
-        for check_rule in rules:
-            result_text = rule.check(sentence)
-            print(result_text)
-            
-        
-           
-            
-    def check_line_length( max_length, sentence):
-        sentence_length = len(sentence[2])
-        
-        if sentence_length > max_length:
-            print("Breaks rule: line length"))
-            return
-        
-        if sentence_length == max_length:
-            print("At max Length")
-            return
-        
-        
-            
-        
-        
+rule = {
+    name: str,
+    type: str,
+    # check: lambda
+}
+""" 
+
+
+def check_line_length(sentence, test_word):
+    max_length = 10
+    print(sentence)
+    sentence_rhythm = produce_rhyme_rhythm_scheme(sentence)[2]
+    print(sentence_rhythm)
+    if len(sentence_rhythm) > max_length:
+        print("Breaks rule: line length")
+        return
         
     
-    def check_timbre_fit
-    ( 
-         timbre: [ ]
-        ,sentence_words: [ [ [  ]]]
-        ,test_rhythm: [ [  ]]
+    if len(sentence_rhythm) == max_length:
+        print("At max Length")
+        return
+        
+    
+    
+def check_timbre_fit( 
+        sentence
+        , test_word
     ):
-        relevent_beats = sentence_words[ [2] [ - len( timbre) ) ]
         
+        timbre = [0,1]
+        
+        sentence_rhythm = produce_rhyme_rhythm_scheme(sentence)[2]
+        print(sentence_rhythm)
+        relevent_beats = sentence_rhythm[ - len( timbre) : ]
+        
+        
+        print(test_word)
         if  not checkMeetsTimbre(           # !!! Better name
-            relevent_beats + test_rhythm
+            relevent_beats + dictionairy[test_word]["rhythm"]
             , timbre
             ):
                 print("Breaks rule: timbre")
 
-    sentence = [
-        [], # words
-        [], # rhyme
-        []  # rhythm
-        ]
     
+def warn_against_rules( rules: [], sentence, test_word, test_word_props):
+    for rule_check in rules:
+        rule_check(sentence,test_word)
+        
+              
+
+def write_sentence(rules: []):
+    
+    done = False
+    sentence = []
+    # sentence = ["The","cat","sat","on","the","mat"]
+
     while( not done ):
-        syllabul_number = len(flatten(words))
+        print("Enter word")
+        test_word = input()
+        test_word_props = dictionairy[test_word]
         
-        test_word = dictionairy[input()]
-        
-        warn_agaist_rules( rules, sentence )
+        warn_against_rules(rules, sentence, test_word, test_word_props )
         
         
         print("Here are some suggested words: \n\n")
-        print( sentence.suggest_words() )
+        #print( sentence.suggest_words() )
         print("Type /y to use this word, or anything else to write that word")
         
         response = input()
-        if response() == "/y":
+        if response == "/y":
+            
             sentence.append(test_word)
         else:
             sentence.append(response)
+
         
-        if word[-1] == ".": break
+        if test_word[-1] == ".": break
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+write_sentence([check_line_length, check_timbre_fit])
     
